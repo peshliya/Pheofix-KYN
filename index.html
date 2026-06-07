@@ -672,6 +672,28 @@
             line-height: 1.6;
         }
 
+        /* View Project Button Design */
+        .view-project-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .view-project-btn:hover {
+            color: var(--accent-cyan);
+            transform: translateX(6px);
+        }
+
+        .view-project-btn i {
+            font-size: 0.85rem;
+        }
+
         /* Logic for Hidden Expansion Projects */
         .hidden-project {
             display: none;
@@ -1347,6 +1369,7 @@
                     <h3>URL Shorter UI Design</h3>
                     <p>Dark-themed, performance-focused URL shortener dashboard designed for efficient link creation,
                         tracking, and analytics-driven management.</p>
+                    <a href="https://www.figma.com/design/mBgMesBruIjVNploZQYoGE/URL-shorter?node-id=0-1&p=f&t=bNHKbScmOZGXuUHD-0" class="view-project-btn">View Project <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
             
@@ -1360,6 +1383,7 @@
                     <h3>Australian RC Crawler Landing page</h3>
                     <p>An advanced RC crawler system built for off-road performance, intelligent control, and responsive
                         terrain adaptability.</p>
+                    <a href="https://www.figma.com/design/6dU3K7qcf6HIo7niupsYGQ/RC-Crawler?node-id=0-1&p=f&t=FgOnNUfXo2GMZsKY-0" class="view-project-btn">View Project <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -1372,6 +1396,7 @@
                     <span class="project-tag">VR Zone</span>
                     <h3>VR Zone Landing page</h3>
                     <p>VR Zone is a UI/UX concept design for a virtual reality platform, designed with a focus on immersive experience, smooth navigation, and user-friendly interface.</p>
+                    <a href="https://www.figma.com/design/VTNib3WzpCxpmRX2odb0Tv/VR-ZONE?node-id=0-1&t=4MqvwX1tEMwKohh2-0" class="view-project-btn">View Project <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -1384,6 +1409,7 @@
                     <span class="project-tag">Pride </span>
                     <h3>Pride music UI</h3>
                     <p>A modern UI/UX concept focused on inclusivity, bold visuals, and smooth user experience. Designed with accessibility and intuitive navigation in mind to create a seamless and engaging interface.</p>
+                    <a href="https://www.figma.com/design/AHBfDm67UC25k86S4CvIAV/Landing-Page?node-id=0-1&t=R3bv8guuasMPaiUE-0" class="view-project-btn">View Project <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -1617,8 +1643,8 @@
             });
         });
 
-        // Hover Effect Connections
-        document.querySelectorAll('a, button, input, textarea, .project-card, .service-card, .feedback-node, .channel-card, .process-node, .social-link, .founder-card-badge').forEach(item => {
+        // Hover Effect Connections (Includes newly added view-project-btn)
+        document.querySelectorAll('a, button, input, textarea, .project-card, .service-card, .feedback-node, .channel-card, .process-node, .social-link, .founder-card-badge, .view-project-btn').forEach(item => {
             item.addEventListener('mouseenter', () => follower.classList.add('hovered'));
             item.addEventListener('mouseleave', () => follower.classList.remove('hovered'));
         });
