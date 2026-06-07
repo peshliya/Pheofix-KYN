@@ -672,6 +672,62 @@
             line-height: 1.6;
         }
 
+        /* Logic for Hidden Expansion Projects */
+        .hidden-project {
+            display: none;
+            opacity: 0;
+            transform: scale(0.96) translateY(40px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-card.show-dynamic {
+            display: block;
+            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Load More Button Wrapper */
+        .more-projects-container {
+            text-align: center;
+            grid-column: 1 / -1;
+            margin-top: 50px;
+        }
+
+        .btn-more {
+            padding: 16px 36px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: rgba(155, 123, 255, 0.05);
+            border: 1px solid rgba(155, 123, 255, 0.25);
+            color: #9B7BFF;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-more:hover {
+            background: var(--purple-gradient);
+            color: var(--bg-dark);
+            box-shadow: 0 0 30px rgba(155, 123, 255, 0.35);
+            transform: translateY(-3px);
+            border-color: transparent;
+        }
+
+        .btn-more i {
+            font-size: 0.9rem;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
         /* Step-by-Step Process Timeline */
         .process-pipeline {
             display: grid;
@@ -1281,6 +1337,7 @@
             <h2 class="section-heading">Featured UI/UX Portfolio Presentations</h2>
         </div>
         <div class="project-matrix">
+            <!-- Project 1 (Always Visible) -->
             <div class="project-card animate-trigger">
                 <div class="project-display">
                     <img src="3.jpg" class="portfolio-img" alt="Neon Banking Dashboard Cover">
@@ -1292,6 +1349,8 @@
                         tracking, and analytics-driven management.</p>
                 </div>
             </div>
+            
+            <!-- Project 2 (Always Visible) -->
             <div class="project-card animate-trigger">
                 <div class="project-display">
                     <img src="RC.png" class="portfolio-img" alt="Luxe Marketplace Cover">
@@ -1302,6 +1361,38 @@
                     <p>An advanced RC crawler system built for off-road performance, intelligent control, and responsive
                         terrain adaptability.</p>
                 </div>
+            </div>
+
+            <!-- Project 3 (Hidden initially, opens via button) -->
+            <div class="project-card hidden-project">
+                <div class="project-display">
+                    <img src="VRzone.png" class="portfolio-img" alt="Crypto Analytics Dashboard">
+                </div>
+                <div class="project-meta">
+                    <span class="project-tag">VR Zone</span>
+                    <h3>VR Zone Landing page</h3>
+                    <p>VR Zone is a UI/UX concept design for a virtual reality platform, designed with a focus on immersive experience, smooth navigation, and user-friendly interface.</p>
+                </div>
+            </div>
+
+            <!-- Project 4 (Hidden initially, opens via button) -->
+            <div class="project-card hidden-project">
+                <div class="project-display">
+                    <img src="pride.png" class="portfolio-img" alt="Luxe Premium E-Commerce">
+                </div>
+                <div class="project-meta">
+                    <span class="project-tag">Pride </span>
+                    <h3>Pride music UI</h3>
+                    <p>A modern UI/UX concept focused on inclusivity, bold visuals, and smooth user experience. Designed with accessibility and intuitive navigation in mind to create a seamless and engaging interface.</p>
+                </div>
+            </div>
+
+            <!-- Grid Expansion Action Controller Trigger -->
+            <div class="more-projects-container">
+                <button id="loadMoreBtn" class="btn-more" onclick="toggleProjects()">
+                    <span>More Projects</span> 
+                    <i class="fa-solid fa-chevron-down" id="btnIcon"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -1634,6 +1725,39 @@
                 btn.style.background = "";
                 e.target.reset();
             }, 3000);
+        }
+
+        // Project Grid Expansion Functional Controller
+        function toggleProjects() {
+            const hiddenCards = document.querySelectorAll('.hidden-project');
+            const btnText = document.querySelector('#loadMoreBtn span');
+            const btnIcon = document.getElementById('btnIcon');
+            
+            // Check current computation state of grid items
+            const isHidden = window.getComputedStyle(hiddenCards[0]).display === "none";
+
+            hiddenCards.forEach((card, index) => {
+                if (isHidden) {
+                    card.classList.add('show-dynamic');
+                    card.style.display = "block";
+                    
+                    // Cascade sequential timing delay profile
+                    card.style.animationDelay = `${index * 120}ms`;
+                    
+                    btnText.innerText = "Show Less";
+                    btnIcon.style.transform = "rotate(180deg)";
+                } else {
+                    card.classList.remove('show-dynamic');
+                    card.style.display = "none";
+                    card.style.animationDelay = "0ms";
+                    
+                    btnText.innerText = "More Projects";
+                    btnIcon.style.transform = "rotate(0deg)";
+                    
+                    // Smooth viewport alignment roll back to main showcase head
+                    document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
         }
     </script>
 </body>
